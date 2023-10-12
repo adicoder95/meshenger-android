@@ -231,10 +231,18 @@ class SettingsActivity : BaseActivity(), ServiceConnection {
             }
         }
 
-        findViewById<SwitchMaterial>(R.id.videoHardwareAccelerationSwitch).apply {
-            isChecked = settings.videoHardwareAcceleration
+        findViewById<SwitchMaterial>(R.id.enableIntelVp8EncoderSwitch).apply {
+            isChecked = settings.enableIntelVp8Encoder
             setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-                settings.videoHardwareAcceleration = isChecked
+                settings.enableIntelVp8Encoder = isChecked
+                binder.saveDatabase()
+            }
+        }
+
+        findViewById<SwitchMaterial>(R.id.enableH264HighProfileSwitch).apply {
+            isChecked = settings.enableH264HighProfile
+            setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+                settings.enableH264HighProfile = isChecked
                 binder.saveDatabase()
             }
         }

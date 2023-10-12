@@ -13,7 +13,6 @@ class Settings {
     var blockUnknown = false
     var useNeighborTable = false
     var promptOutgoingCalls = false
-    var videoHardwareAcceleration = false
     var disableCallHistory = false
     var disableProximitySensor = false
     var disableAudioProcessing = false
@@ -32,6 +31,8 @@ class Settings {
     var cameraResolution = "auto"
     var cameraFramerate = "auto"
     var automaticStatusUpdates = false
+    var enableIntelVp8Encoder = false
+    var enableH264HighProfile = true
     var addresses = mutableListOf<String>()
 
     fun getOwnContact(): Contact {
@@ -53,7 +54,6 @@ class Settings {
             s.speakerphoneMode = obj.getString("speakerphone_mode")
             s.blockUnknown = obj.getBoolean("block_unknown")
             s.useNeighborTable = obj.getBoolean("use_neighbor_table")
-            s.videoHardwareAcceleration = obj.getBoolean("video_hardware_acceleration")
             s.disableAudioProcessing = obj.getBoolean("disable_audio_processing")
             s.connectTimeout = obj.getInt("connect_timeout")
             s.disableCallHistory = obj.getBoolean("disable_call_history")
@@ -73,6 +73,8 @@ class Settings {
             s.cameraResolution = obj.getString("camera_resolution")
             s.cameraFramerate = obj.getString("camera_framerate")
             s.automaticStatusUpdates = obj.getBoolean("automatic_status_updates")
+            s.enableIntelVp8Encoder = obj.getBoolean("enable_intel_vp8_encoder")
+            s.enableH264HighProfile = obj.getBoolean("enable_h264_high_profile")
 
             val array = obj.getJSONArray("addresses")
             val addresses = mutableListOf<String>()
@@ -105,7 +107,6 @@ class Settings {
             obj.put("block_unknown", s.blockUnknown)
             obj.put("use_neighbor_table", s.useNeighborTable)
             obj.put("connect_timeout", s.connectTimeout)
-            obj.put("video_hardware_acceleration", s.videoHardwareAcceleration)
             obj.put("disable_audio_processing", s.disableAudioProcessing)
             obj.put("disable_call_history", s.disableCallHistory)
             obj.put("disable_proximity_sensor", s.disableProximitySensor)
@@ -124,6 +125,8 @@ class Settings {
             obj.put("camera_resolution", s.cameraResolution)
             obj.put("camera_framerate", s.cameraFramerate)
             obj.put("automatic_status_updates", s.automaticStatusUpdates)
+            obj.put("enable_intel_vp8_encoder", s.enableIntelVp8Encoder)
+            obj.put("enable_h264_high_profile", s.enableH264HighProfile)
 
             val addresses = JSONArray()
             for (i in s.addresses.indices) {

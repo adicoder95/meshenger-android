@@ -312,6 +312,14 @@ class Database {
                 newFrom = "4.2.4"
             }
 
+            if (newFrom == "4.2.4") {
+                val acceleration = settings.getBoolean("video_hardware_acceleration")
+                settings.put("enable_intel_vp8_encoder", acceleration)
+                settings.put("enable_h264_high_profile", acceleration)
+                settings.remove("video_hardware_acceleration")
+                newFrom = "4.2.5"
+            }
+
             alignSettings(settings)
 
             db.put("version", newFrom)

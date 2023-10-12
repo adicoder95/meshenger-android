@@ -525,11 +525,11 @@ class RTCCall : RTCPeerConnection {
         val encoderFactory: VideoEncoderFactory
         val decoderFactory: VideoDecoderFactory
 
-        Log.d(this, "initVideo() video acceleration: ${settings.videoHardwareAcceleration}")
+        val enableIntelVp8Encoder = binder.getSettings().enableIntelVp8Encoder
+        val enableH264HighProfile = binder.getSettings().enableH264HighProfile
+        Log.d(this, "initVideo() enableIntelVp8Encoder: ${enableIntelVp8Encoder}, enableH264HighProfile: ${enableH264HighProfile}")
 
-        if (binder.getSettings().videoHardwareAcceleration) {
-            val enableIntelVp8Encoder = true
-            val enableH264HighProfile = true
+        if (enableIntelVp8Encoder || enableH264HighProfile) {
             encoderFactory = DefaultVideoEncoderFactory(eglBase.eglBaseContext, enableIntelVp8Encoder, enableH264HighProfile)
             decoderFactory = DefaultVideoDecoderFactory(eglBase.eglBaseContext)
         } else {
